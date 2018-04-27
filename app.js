@@ -28,7 +28,9 @@ app.use(express.static(__dirname +"/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 
-mongoose.connect("mongodb://localhost/yelp_camp");
+// comment according to local or deploy version
+//mongoose.connect("mongodb://localhost/gallery");
+mongoose.connect("mongodb://wduan:123456@ds161529.mlab.com:61529/tudo-gallery");
 
 //passport configuration
 app.use(require("express-session")({
