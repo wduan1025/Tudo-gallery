@@ -1,5 +1,5 @@
-# Album
-Album website for scenery rating
+# Tudo-gallery
+Gallery for sharing sceneries
 ## Features
 * User login and logout
 * Network image refernce
