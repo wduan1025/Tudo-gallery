@@ -28,9 +28,9 @@ app.use(express.static(__dirname +"/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 
-// comment according to local or deploy version
-//mongoose.connect("mongodb://localhost/gallery");
-mongoose.connect("mongodb://wduan:wduan27@ds161529.mlab.com:61529/tudo-gallery");
+// search for DATABASEURL in environment variables, if there is not, use dev default
+var url = process.env.DATABASEURL || "mongodb://localhost/gallery"
+mongoose.connect(url);
 
 //passport configuration
 app.use(require("express-session")({
@@ -59,5 +59,5 @@ app.use(commentRoutes);
 //app.use("/campgrounds", commentRoutes);
 
 app.listen(process.env.PORT, process.env.IP,function(){
-    console.log("YelpCamp server has started");
+    console.log("server has started");
 })
