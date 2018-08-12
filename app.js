@@ -1,7 +1,7 @@
 var express = require("express"),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose"),
-    Campground = require("./models/campground"),
+    Campground = require("./models/photo"),
     Comment = require("./models/comment"),
     seedDB = require("./seeds"),
     passport = require("passport"),
@@ -11,7 +11,7 @@ var express = require("express"),
     flash = require("connect-flash");
 // requiring routes
 var commentRoutes = require("./routes/comments");
-var campgroundRoutes = require("./routes/campgrounds");
+var campgroundRoutes = require("./routes/photos");
 var indexRoutes = require("./routes/index");
     
 passport.use(new LocalStrategy(User.authenticate()));
@@ -55,8 +55,6 @@ app.use(function(req, res, next){
 app.use(indexRoutes);
 app.use(campgroundRoutes);
 app.use(commentRoutes);
-//append /campgrounds in front of every router
-//app.use("/campgrounds", commentRoutes);
 
 app.listen(process.env.PORT, process.env.IP,function(){
     console.log("server has started");

@@ -1,5 +1,5 @@
 var mongoose = require("mongoose"),
-    Campground = require("./models/campground"),
+    Campground = require("./models/photo"),
     Comment = require("./models/comment");
 
 var data = [
@@ -50,7 +50,7 @@ function seedDB(){
                                     }else{
                                         campground.comments.push(comment._id);
                                         campground.save();
-                                        console.log("added campground");
+                                        console.log("added photo");
                                     }
                                 });
                             }

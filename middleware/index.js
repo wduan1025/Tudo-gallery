@@ -1,4 +1,4 @@
-var Campground = require("../models/campground.js");
+var Campground = require("../models/photos.js");
 var Comment = require("../models/comment.js");
 // all middlewares
 var middlewareObj = {};
@@ -7,8 +7,8 @@ middlewareObj.checkCampgroundOwnership = function(req, res, next){
     if(req.isAuthenticated()){
         Campground.findById(req.params.id, function(err, foundCampground){
             if(err){
-                req.flash("error", "Campground not found");
-                res.redirect("/campgrounds");
+                req.flash("error", "Photo not found");
+                res.redirect("/photos");
             }else{
                 //does the current user own the campground?
                 // ATTENTION: foundCampground.author.id is an object, while req.user._id
@@ -32,8 +32,8 @@ middlewareObj.checkCommentOwnership = function(req, res, next){
     if(req.isAuthenticated()){
         Comment.findById(req.params.comment_id, function(err, foundComment){
             if(err){
-                req.flash("error", "Campground not found");
-                res.redirect("/campgrounds");
+                req.flash("error", "Photo not found");
+                res.redirect("/photos");
             }else{
                 //does the current user own the campground?
                 // ATTENTION: foundCampground.author.id is an object, while req.user._id

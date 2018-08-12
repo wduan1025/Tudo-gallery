@@ -1,10 +1,10 @@
 var express = require("express");
 var router = express.Router();
-var Campground = require("../models/campground");
+var Campground = require("../models/photo");
 //if we require a directory, the index.js inside will be automatically required
 var middleware = require("../middleware");
 
-router.get("/campgrounds", function(req, res){
+router.get("/photos", function(req, res){
         //res.render("campgrounds", {campgrounds:campgrounds});
         //get all campgrounds
         Campground.find({}, function(err, allCampgrounds){
@@ -13,12 +13,12 @@ router.get("/campgrounds", function(req, res){
             }else{
                 // we also pass in the user information for the header
                 // since header file is glued to index.ejs eventually, we can directly use currentUser in the header.ejs
-                res.render("campgrounds/index", {campgrounds:allCampgrounds, currentUser:req.user});
+                res.render("photos/index", {campgrounds:allCampgrounds, currentUser:req.user});
             }
         });
 });
 
-router.post("/campgrounds", middleware.isLoggedIn, function(req, res){
+router.post("/photos", middleware.isLoggedIn, function(req, res){
     //get data from form
     //var newCampground = req.body.xxx;
     var name = req.body.name;
@@ -35,20 +35,20 @@ router.post("/campgrounds", middleware.isLoggedIn, function(req, res){
             if(err){
                 console.log(err);
             }else{
-                console.log("newly created campground");
+                console.log("newly created photo");
                 console.log(c);
             }
         
     });
     //redirect back to campgrounds
-    res.redirect("/campgrounds");
+    res.redirect("/photos");
 });
 
-router.get("/campgrounds/new", middleware.isLoggedIn, function(req, res){
-    res.render("campgrounds/new");
+router.get("/photos/new", middleware.isLoggedIn, function(req, res){
+    res.render("photos/new");
 });
 //show route
-router.get("/campgrounds/:id", function(req, res){
+router.get("/photos/:id", function(req, res){
     //find the campground with the provided id
     //use populate to replace id with comments
     Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
@@ -56,7 +56,7 @@ router.get("/campgrounds/:id", function(req, res){
             console.log(err);
         }else{
             //if not populate, the console.log.comments will be ids
-            res.render("campgrounds/show", {campground:foundCampground});
+            res.render("photos/show", {campground:foundCampground});
         }
     });
     //render the show page of this campground
@@ -64,34 +64,34 @@ router.get("/campgrounds/:id", function(req, res){
 
 
 // EDIT CAMPTROUD ROUTE
-router.get('/campgrounds/:id/edit', middleware.checkCampgroundOwnership, function(req, res){
+router.get('/photos/:id/edit', middleware.checkCampgroundOwnership, function(req, res){
     Campground.findById(req.params.id, function(err, foundCampground){
         if(err){
             req.flash("error", "Campground not found");
             console.log(err);
         }else{
-            res.render("campgrounds/edit", {campground:foundCampground});
+            res.render("photos/edit", {campground:foundCampground});
         }
     });
 });
 
 //UPDATE CAMPGROUND ROUTE
-router.put("/campgrounds/:id", middleware.checkCampgroundOwnership, function(req, res){
+router.put("/photos/:id", middleware.checkCampgroundOwnership, function(req, res){
     Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
         if(err){
-            res.redirect("/campgrounds");
+            res.redirect("/photos");
         }else{
-            res.redirect("/campgrounds/" + req.params.id);
+            res.redirect("/photos/" + req.params.id);
         }
     });
 });
 //DELETE CAMPGROUND ROUTE
-router.delete("/campgrounds/:id", middleware.checkCampgroundOwnership, function(req, res){
+router.delete("/photos/:id", middleware.checkCampgroundOwnership, function(req, res){
     Campground.findByIdAndRemove(req.params.id, function(err){
         if(err){
-            res.redirect("/campgrounds");
+            res.redirect("/photos");
         }else{
-            res.redirect("/campgrounds")
+            res.redirect("/photos")
         }
     })
 });
