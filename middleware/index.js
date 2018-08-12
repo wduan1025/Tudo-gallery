@@ -1,4 +1,4 @@
-var Campground = require("../models/photos.js");
+var Campground = require("../models/photo.js");
 var Comment = require("../models/comment.js");
 // all middlewares
 var middlewareObj = {};
