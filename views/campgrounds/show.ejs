@@ -14,8 +14,8 @@
                 </p>
                 <!-- currentUser is setup in app.js so that every router page will have the req.user as currentUser -->
                 <% if(currentUser && campground.author.id.equals(currentUser._id)){%>
-                    <a href="/campgrounds/<%= campground._id%>/edit" class="btn btn-warning"> Edit</a>
-                    <form class="delete-form" action="/campgrounds/<%= campground._id%>?_method=DELETE" method="POST">
+                    <a href="/photos/<%= campground._id%>/edit" class="btn btn-warning"> Edit</a>
+                    <form class="delete-form" action="/photos/<%= campground._id%>?_method=DELETE" method="POST">
                         <button class="btn btn-danger">Delete</button>
                     </form>
                 <% } %>
@@ -36,10 +36,10 @@
                             
                             <% if(currentUser && comment.author.id.equals(currentUser._id)){%>
                                 <a class="btn btn-xs btn-warning" 
-                                        href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit">
+                                        href="/photos/<%=campground._id%>/comments/<%=comment._id%>/edit">
                                     Edit
                                 </a>
-                                <form class="delete-form" action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                                <form class="delete-form" action="/photos/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
                                     <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                                 </form>
                             <% } %>
