@@ -1,5 +1,5 @@
 # Potato-album
-Gallery for sharing sceneries
+An album for sharing sceneries
 [**Visit the website**](https://potato-album.herokuapp.com/)<br>
 ## Features
 * User login and logout
